@@ -21,7 +21,7 @@ public class PersonJdbcDAO implements PersonDAO {
     private static final String CREATE_QUERY = "INSERT INTO person (name, forname) VALUES (?, ?)";
     private static final String REMOVE_QUERY = "DELETE FROM person WHERE key=?";
 
-    private DataSource dataSource;
+    private final DataSource dataSource;
 
     public PersonJdbcDAO(DataSource dataSource) {
         this.dataSource = dataSource;
@@ -29,6 +29,9 @@ public class PersonJdbcDAO implements PersonDAO {
 
     @Override
     public Person findByKey(Long key) {
+        if (key == null) {
+            throw new NullPointerException("key");
+        }
         try (Connection connection = dataSource.getConnection()) {
             PreparedStatement statement = connection.prepareStatement(FIND_BY_KEY_QUERY);
             statement.setLong(1, key);

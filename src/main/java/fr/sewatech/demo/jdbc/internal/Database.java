@@ -1,5 +1,7 @@
 package fr.sewatech.demo.jdbc.internal;
 
+import java.sql.Connection;
+import java.sql.DriverManager;
 import java.sql.SQLException;
 import javax.sql.DataSource;
 
@@ -10,7 +12,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 public class Database {
-    public static final String DB_URL = "jdbc:h2:mem:demo";
+    public static final String DB_URL = "jdbc:h2:mem:demo;DB_CLOSE_DELAY=-1";
 
     private static final Logger logger = LoggerFactory.getLogger(Database.class);
 
@@ -27,7 +29,6 @@ public class Database {
     public Database() {
         try {
             logger.debug("Starting H2");
-            // Not in a try-with-resources : I don't want to close it !
             dataSource = new JdbcDataSource();
             dataSource.setUrl(DB_URL);
             dataSource.getConnection();

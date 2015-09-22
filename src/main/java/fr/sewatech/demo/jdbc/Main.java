@@ -5,10 +5,10 @@ import javax.sql.DataSource;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import fr.sewatech.demo.jdbc.common.DAO;
 import fr.sewatech.demo.jdbc.common.Person;
 import fr.sewatech.demo.jdbc.common.PersonDAO;
 import fr.sewatech.demo.jdbc.internal.Database;
+import fr.sewatech.demo.jdbc.mybatis.PersonMyBatisDAO;
 import fr.sewatech.demo.jdbc.plain.PersonJdbcDAO;
 
 public class Main {
@@ -18,13 +18,11 @@ public class Main {
         logger.info("Let's start...");
         DataSource dataSource = Database.create();
 
-        plainJdbc(dataSource);
-    }
-
-    public static void plainJdbc(DataSource dataSource) {
-        logger.info("Let's start with the plain JDBC example...");
-
+        logger.info("=========== Plain JDBC example ===========");
         demo(new PersonJdbcDAO(dataSource));
+
+        logger.info("=========== MyBatis example ===========");
+        demo(new PersonMyBatisDAO(dataSource));
     }
 
     private static void demo(PersonDAO personDAO) {
