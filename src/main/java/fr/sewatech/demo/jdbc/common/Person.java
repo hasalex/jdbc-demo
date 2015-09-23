@@ -1,7 +1,6 @@
 package fr.sewatech.demo.jdbc.common;
 
-public class Person {
-    private Long key;
+public class Person extends GenericEntity {
     private String name;
     private String forname;
 
@@ -15,17 +14,9 @@ public class Person {
     }
 
     public Person(Long key, String name, String forname) {
-        this.key = key;
+        super(key);
         this.name = name;
         this.forname = forname;
-    }
-
-    public Long getKey() {
-        return key;
-    }
-
-    public void setKey(Long key) {
-        this.key = key;
     }
 
     public String getName() {
@@ -46,6 +37,6 @@ public class Person {
 
     @Override
     public String toString() {
-        return "Person{" + "key=" + key + ",name='" + name + "'" + ",forname='" + forname + "'" + "}";
+        return "Person{" + "key=" + getKey() + ",name='" + name + "'" + ",forname='" + forname + "'" + "}";
     }
 }
