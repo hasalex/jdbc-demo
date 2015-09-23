@@ -9,7 +9,7 @@ import org.apache.ibatis.annotations.Update;
 
 import fr.sewatech.demo.jdbc.common.Person;
 
-public interface PersonMapper {
+public interface PersonMapper extends GenericMapper<Person> {
     String FIND_ALL_QUERY = "SELECT key, name, forname FROM person ";
     String FIND_BY_KEY_QUERY = FIND_ALL_QUERY + "WHERE key=#{1} ";
     String FIND_BY_NAME_LIKE_QUERY = FIND_ALL_QUERY + "WHERE upper(name) like upper(#{1})";
